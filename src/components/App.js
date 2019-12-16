@@ -37,10 +37,13 @@ export default class App extends Component {
 
   onChangeModal = modalImage => {
     this.setState({ modalOpen: true, modalImage });
+    window.addEventListener('keydown', this.onCloseModal);
   };
 
   onCloseModal = e => {
-    if (e.target === e.currentTarget) this.setState({ modalOpen: false });
+    if (e.target === e.currentTarget || e.keyCode === 27)
+      this.setState({ modalOpen: false });
+    window.removeEventListener('keydown', this.onCloseModal);
   };
 
   changePage = () => {
